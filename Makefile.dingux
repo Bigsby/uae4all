@@ -12,14 +12,14 @@ all: $(PROG)
 FAME_CORE=1
 LIB7Z=1
 
-DEFAULT_CFLAGS = -I/opt/mipsel-linux-uclibc/include -I/opt/mipsel-linux-uclibc/usr/include  -I/opt/mipsel-linux-uclibc/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -DDINGUX -DDINGOO
+DEFAULT_CFLAGS = -I/opt/mipsel-linux-uclibc/include -I/opt/mipsel-linux-uclibc/usr/include  -I/opt/mipsel-linux-uclibc/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -DDINGUX -DDINGOO $(sdl2-config --cflags)
 
-LDFLAGS = -lSDL -lSDL_image -lz -lpthread
+LDFLAGS = -lSDL -lSDL_image -lz -lpthread $(sdl2-config --libs)
 # add -lSDL_mixer if -DMENU_MUSIC below
 #-s -static
 
 
-MORE_CFLAGS = -Isrc/ -Isrc/include/ -Isrc/menu -Isrc/vkbd -fomit-frame-pointer  -Wno-unused -Wno-format -DUSE_SDL -DGCCCONSTFUNC="__attribute__((const))" -DUSE_UNDERSCORE -fno-exceptions -DUNALIGNED_PROFITABLE -DREGPARAM="__attribute__((regparm(3)))" -DOPTIMIZED_FLAGS -D__inline__=__inline__ -DSHM_SUPPORT_LINKS=0 -DOS_WITHOUT_MEMORY_MANAGEMENT -DVKBD_ALWAYS
+MORE_CFLAGS = -Isrc/ -Isrc/include/ -Isrc/menu -Isrc/vkbd -fomit-frame-pointer  -Wno-unused -Wno-format -DUSE_SDL -DGCCCONSTFUNC="__attribute__((const))" -DUSE_UNDERSCORE -fno-exceptions -DUNALIGNED_PROFITABLE -DREGPARAM="__attribute__((regparm(3)))" -DOPTIMIZED_FLAGS -D__inline__=__inline__ -DSHM_SUPPORT_LINKS=0 -DOS_WITHOUT_MEMORY_MANAGEMENT -DVKBD_ALWAYS -DSDL_DISABLE_IMMINTRIN_H
 
 MORE_CFLAGS += -O3 -mips32 -mtune=mips32 -mno-mips16 -mhard-float -mno-shared -mbranch-likely -pipe -fno-exceptions -fno-rtti
 
